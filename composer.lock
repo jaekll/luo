@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "6b9a74290d1ce77641321c846475ab00",
-    "content-hash": "09c3d6cb820b0f7e546b8d5395b3e723",
+    "hash": "ccf08ace0f373361b406c715bf3f336a",
+    "content-hash": "cd8d10a2a8c00f20102aaf9f424eb614",
     "packages": [
         {
             "name": "doctrine/instantiator",
@@ -515,16 +515,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "4.8.32",
+            "version": "4.8.35",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "f5e1941a8dacf0d904753ff2895c6f68e54bcee1"
+                "reference": "791b1a67c25af50e230f841ee7a9c6eba507dc87"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://packagist.phpcomposer.com/files/sebastianbergmann/phpunit/f5e1941a8dacf0d904753ff2895c6f68e54bcee1.zip",
-                "reference": "f5e1941a8dacf0d904753ff2895c6f68e54bcee1",
+                "url": "https://packagist.phpcomposer.com/files/sebastianbergmann/phpunit/791b1a67c25af50e230f841ee7a9c6eba507dc87.zip",
+                "reference": "791b1a67c25af50e230f841ee7a9c6eba507dc87",
                 "shasum": ""
             },
             "require": {
@@ -583,7 +583,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2017-01-22 08:37:05"
+            "time": "2017-02-06 05:18:07"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
@@ -642,17 +642,67 @@
             "time": "2015-10-02 06:51:40"
         },
         {
-            "name": "sebastian/comparator",
-            "version": "1.2.2",
+            "name": "predis/predis",
+            "version": "v1.1.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/sebastianbergmann/comparator.git",
-                "reference": "6a1ed12e8b2409076ab22e3897126211ff8b1f7f"
+                "url": "https://github.com/nrk/predis.git",
+                "reference": "f0210e38881631afeafb56ab43405a92cafd9fd1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://packagist.phpcomposer.com/files/sebastianbergmann/comparator/6a1ed12e8b2409076ab22e3897126211ff8b1f7f.zip",
-                "reference": "6a1ed12e8b2409076ab22e3897126211ff8b1f7f",
+                "url": "https://packagist.phpcomposer.com/files/nrk/predis/f0210e38881631afeafb56ab43405a92cafd9fd1.zip",
+                "reference": "f0210e38881631afeafb56ab43405a92cafd9fd1",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.9"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.8"
+            },
+            "suggest": {
+                "ext-curl": "Allows access to Webdis when paired with phpiredis",
+                "ext-phpiredis": "Allows faster serialization and deserialization of the Redis protocol"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Predis\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Daniele Alessandri",
+                    "email": "suppakilla@gmail.com",
+                    "homepage": "http://clorophilla.net"
+                }
+            ],
+            "description": "Flexible and feature-complete Redis client for PHP and HHVM",
+            "homepage": "http://github.com/nrk/predis",
+            "keywords": [
+                "nosql",
+                "predis",
+                "redis"
+            ],
+            "time": "2016-06-16 16:22:20"
+        },
+        {
+            "name": "sebastian/comparator",
+            "version": "1.2.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sebastianbergmann/comparator.git",
+                "reference": "2b7424b55f5047b47ac6e5ccb20b2aea4011d9be"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://packagist.phpcomposer.com/files/sebastianbergmann/comparator/2b7424b55f5047b47ac6e5ccb20b2aea4011d9be.zip",
+                "reference": "2b7424b55f5047b47ac6e5ccb20b2aea4011d9be",
                 "shasum": ""
             },
             "require": {
@@ -703,7 +753,7 @@
                 "compare",
                 "equality"
             ],
-            "time": "2016-11-19 09:18:40"
+            "time": "2017-01-29 09:50:25"
         },
         {
             "name": "sebastian/diff",
@@ -1015,16 +1065,16 @@
         },
         {
             "name": "symfony/dom-crawler",
-            "version": "v2.8.16",
+            "version": "v2.8.17",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/dom-crawler.git",
-                "reference": "52cc211afa9458c0a54c478010a55f44892c1c02"
+                "reference": "6225d65e001b3f03f63d43e302a26314f8e1e6fe"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://packagist.phpcomposer.com/files/symfony/dom-crawler/52cc211afa9458c0a54c478010a55f44892c1c02.zip",
-                "reference": "52cc211afa9458c0a54c478010a55f44892c1c02",
+                "url": "https://packagist.phpcomposer.com/files/symfony/dom-crawler/6225d65e001b3f03f63d43e302a26314f8e1e6fe.zip",
+                "reference": "6225d65e001b3f03f63d43e302a26314f8e1e6fe",
                 "shasum": ""
             },
             "require": {
@@ -1067,7 +1117,7 @@
             ],
             "description": "Symfony DomCrawler Component",
             "homepage": "https://symfony.com",
-            "time": "2017-01-02 20:30:24"
+            "time": "2017-01-21 16:40:50"
         },
         {
             "name": "symfony/polyfill-mbstring",
@@ -1130,16 +1180,16 @@
         },
         {
             "name": "symfony/yaml",
-            "version": "v3.2.2",
+            "version": "v3.2.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
-                "reference": "50eadbd7926e31842893c957eca362b21592a97d"
+                "reference": "9724c684646fcb5387d579b4bfaa63ee0b0c64c8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://packagist.phpcomposer.com/files/symfony/yaml/50eadbd7926e31842893c957eca362b21592a97d.zip",
-                "reference": "50eadbd7926e31842893c957eca362b21592a97d",
+                "url": "https://packagist.phpcomposer.com/files/symfony/yaml/9724c684646fcb5387d579b4bfaa63ee0b0c64c8.zip",
+                "reference": "9724c684646fcb5387d579b4bfaa63ee0b0c64c8",
                 "shasum": ""
             },
             "require": {
@@ -1181,20 +1231,20 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
-            "time": "2017-01-03 13:51:32"
+            "time": "2017-02-16 22:46:52"
         },
         {
             "name": "topthink/framework",
-            "version": "v5.0.5",
+            "version": "v5.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/top-think/framework.git",
-                "reference": "86cc9378a0c46e66dabed6681f8b8de758585ae1"
+                "reference": "a3a37e6cfad132d5b02ffff8f23a4abc565f7928"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://packagist.phpcomposer.com/files/top-think/framework/86cc9378a0c46e66dabed6681f8b8de758585ae1.zip",
-                "reference": "86cc9378a0c46e66dabed6681f8b8de758585ae1",
+                "url": "https://packagist.phpcomposer.com/files/top-think/framework/a3a37e6cfad132d5b02ffff8f23a4abc565f7928.zip",
+                "reference": "a3a37e6cfad132d5b02ffff8f23a4abc565f7928",
                 "shasum": ""
             },
             "require": {
@@ -1232,7 +1282,7 @@
                 "orm",
                 "thinkphp"
             ],
-            "time": "2017-01-23 05:59:21"
+            "time": "2017-02-07 09:39:59"
         },
         {
             "name": "topthink/think-angular",
@@ -1465,16 +1515,16 @@
         },
         {
             "name": "topthink/think-mongo",
-            "version": "v1.2",
+            "version": "v1.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/top-think/think-mongo.git",
-                "reference": "d26ddc47e85d2a1a41a6e38f155610a1c8f66f70"
+                "reference": "2dd7ecae965cd3a6e5cc99f3db7c63353dae4cf3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://packagist.phpcomposer.com/files/top-think/think-mongo/d26ddc47e85d2a1a41a6e38f155610a1c8f66f70.zip",
-                "reference": "d26ddc47e85d2a1a41a6e38f155610a1c8f66f70",
+                "url": "https://packagist.phpcomposer.com/files/top-think/think-mongo/2dd7ecae965cd3a6e5cc99f3db7c63353dae4cf3.zip",
+                "reference": "2dd7ecae965cd3a6e5cc99f3db7c63353dae4cf3",
                 "shasum": ""
             },
             "type": "library",
@@ -1495,7 +1545,7 @@
                 }
             ],
             "description": "mongodb driver for thinkphp5",
-            "time": "2016-11-17 13:20:01"
+            "time": "2017-02-06 06:05:55"
         },
         {
             "name": "topthink/think-queue",
@@ -1706,16 +1756,16 @@
         },
         {
             "name": "workerman/workerman",
-            "version": "v3.3.6",
+            "version": "v3.3.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/walkor/Workerman.git",
-                "reference": "cc02f47bb7bd5f2ce053cf75fcac02565aa729cf"
+                "reference": "02e71eef4714bd251e1b456cb047d3c0d6732192"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://packagist.phpcomposer.com/files/walkor/Workerman/cc02f47bb7bd5f2ce053cf75fcac02565aa729cf.zip",
-                "reference": "cc02f47bb7bd5f2ce053cf75fcac02565aa729cf",
+                "url": "https://packagist.phpcomposer.com/files/walkor/Workerman/02e71eef4714bd251e1b456cb047d3c0d6732192.zip",
+                "reference": "02e71eef4714bd251e1b456cb047d3c0d6732192",
                 "shasum": ""
             },
             "require": {
@@ -1748,7 +1798,7 @@
                 "asynchronous",
                 "event-loop"
             ],
-            "time": "2016-12-22 14:28:34"
+            "time": "2017-02-14 12:29:56"
         }
     ],
     "packages-dev": [],

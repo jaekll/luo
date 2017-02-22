@@ -3,6 +3,7 @@ namespace app\admin\controller;
 
 use app\admin\model\Role;
 use app\admin\model\RoleModel;
+use app\admin\model\UserModel;
 use org\Verify;
 use think\Controller;
 use think\Db;
@@ -11,6 +12,9 @@ use com\Geetestlib;
 class Login extends Controller{
 
     public function login(){
+        cache('app_begin','6666',0);
+        cache('keymap','123',6);
+        cache('keyvalue','456',6);
         return $this->fetch('/login');
     }
 
@@ -35,7 +39,8 @@ class Login extends Controller{
         }
 
         //验证用户名密码
-        $hasUser = Db::name('admin')->where('username', $username)->find();
+        $user = new UserModel();
+        $hasUser = $user->getOneByName($username);
         if(empty($hasUser) || md5(md5($password) . config('auth_key')) != $hasUser['password']){
             return json(['code' => -1, 'url' => '', 'msg' => '账号或密码错误']);
         }

@@ -1,7 +1,6 @@
 <?php
 
 namespace app\admin\controller;
-use app\admin\model\Node;
 use app\admin\model\NodeModel;
 use app\common\lib\Config;
 use think\Controller;

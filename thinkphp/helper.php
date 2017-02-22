@@ -304,12 +304,10 @@ if (!function_exists('session')) {
             return 0 === strpos($name, '?') ? Session::has(substr($name, 1), $prefix) : Session::get($name, $prefix);
         } elseif (is_null($value)) {
             // 删除
-            Session::delete($name, $prefix);
-            return true;
+            return Session::delete($name, $prefix);
         } else {
             // 设置
-            Session::set($name, $value, $prefix);
-            return true;
+            return Session::set($name, $value, $prefix);
         }
     }
 }
@@ -497,15 +495,16 @@ if (!function_exists('redirect')) {
      * @param mixed         $url 重定向地址 支持Url::build方法的地址
      * @param array|integer $params 额外参数
      * @param integer       $code 状态码
+     * @param array         $with 隐式传参
      * @return \think\response\Redirect
      */
-    function redirect($url = [], $params = [], $code = 302)
+    function redirect($url = [], $params = [], $code = 302, $with = [])
     {
         if (is_integer($params)) {
             $code   = $params;
             $params = [];
         }
-        return Response::create($url, 'redirect', $code)->params($params);
+        return Response::create($url, 'redirect', $code)->params($params)->with($with);
     }
 }
 

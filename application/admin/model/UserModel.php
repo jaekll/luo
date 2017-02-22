@@ -53,6 +53,10 @@ class UserModel extends Model {
         return $this->where('id',$id)->find();
     }
 
+    public function getOneByName($name){
+        return $this->where('username',$name)->find();
+    }
+
 
     /**
      * 添加一个用户
