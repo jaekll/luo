@@ -65,11 +65,11 @@
                                 <td>
                                     {{# if(d[i].id!==1){ }}
                                     {{# if(d[i].status==1){ }}
-                                    <a class="red" href="javascript:;" onclick="user_state({{d[i].id}});">
+                                    <a class="red" href="javascript:;" onclick="user_status({{d[i].id}});">
                                         <div id="zt{{d[i].id}}"><span class="label label-info">开启</span></div>
                                     </a>
                                     {{# }else{ }}
-                                    <a class="red" href="javascript:;" onclick="user_state({{d[i].id}});">
+                                    <a class="red" href="javascript:;" onclick="user_status({{d[i].id}});">
                                         <div id="zt{{d[i].id}}"><span class="label label-danger">禁用</span></div>
                                     </a>
                                     {{# } }}
@@ -154,8 +154,8 @@
     }
 
     //用户状态
-    function user_state(id){
-        luo.status(id,'{:url("user_state")}');
+    function user_status(id){
+        luo.status(id,'{:url("user_status")}');
     }
 
 </script>

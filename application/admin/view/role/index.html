@@ -51,11 +51,11 @@
                                 <td>
                                     {{# if(d[i].id!==1){ }}
                                     {{# if(d[i].status==1){ }}
-                                    <a href="javascript:;" onclick="role_state({{d[i].id}});">
+                                    <a href="javascript:;" onclick="role_status({{d[i].id}});">
                                         <div id="zt{{d[i].id}}"><span class="label label-info">开启</span></div>
                                     </a>
                                     {{# }else{ }}
-                                    <a href="javascript:;" onclick="role_state({{d[i].id}});">
+                                    <a href="javascript:;" onclick="role_status({{d[i].id}});">
                                         <div id="zt{{d[i].id}}"><span class="label label-danger">禁用</span></div>
                                     </a>
                                     {{# } }}
@@ -168,8 +168,8 @@
     }
 
     //角色状态
-    function role_state(id){
-        luo.status(id,'{:url("role_state")}');
+    function role_status(id){
+        luo.status(id,'{:url("role_status")}');
     }
 
     zNodes = '';

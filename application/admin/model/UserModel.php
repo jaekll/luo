@@ -99,6 +99,26 @@ class UserModel extends Model {
         }
     }
 
+    /**
+     * 编辑用户信息
+     * @param $param
+     * @param $id
+     * @return array
+     */
+    public function updateUser($param,$id){
+        try{
+            $result =  $this->validate('UserValidate')->allowField(true)->save($param, ['id' => $id]);
+            if(false === $result){
+                return ['code' => 0, 'data' => '', 'msg' => $this->getError()];
+            }else{
+                log_db(session('uid'),session('username'),'用户【'.$id.'】编辑成功',1);
+                return true;
+            }
+        }catch( \PDOException $e){
+            return false;
+        }
+    }
+
 
     /**
      * 根据用户ID 删除一个用户

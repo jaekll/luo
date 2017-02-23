@@ -12,7 +12,7 @@ namespace org;
 class Verify
 {
     protected $config = [
-        'seKey'    => 'ThinkPHP.CN', // 验证码加密密钥
+        'seKey'    => 'nidayed', // 验证码加密密钥
         'codeSet'  => '2345678abcdefhijkmnpqrstuvwxyzABCDEFGHJKLMNPQRTUVWXY', // 验证码字符集合
         'expire'   => 1800, // 验证码过期时间（s）
         'useZh'    => false, // 使用中文验证码
@@ -82,19 +82,19 @@ class Verify
      */
     public function check($code, $id = '')
     {
-        $key = $this->authcode($this->seKey) . $id;
+        $key = $this->authcode($this->config['seKey']) . $id;
         // 验证码不能为空
         $secode = session($key);
         if (empty($code) || empty($secode)) {
             return false;
         }
         // session 过期
-        if (time() - $secode['verify_time'] > $this->expire) {
+        if (time() - $secode['verify_time'] > $this->config['expire']) {
             session($key, null);
             return false;
         }
         if ($this->authcode(strtoupper($code)) == $secode['verify_code']) {
-            $this->reset && session($key, null);
+            $this->config['reset'] && session($key, null);
             return true;
         }
         return false;
@@ -160,7 +160,7 @@ class Verify
             }
         }
         // 保存验证码
-        $key                   = $this->authcode($this->seKey);
+        $key                   = $this->authcode($this->config['seKey']);
         $code                  = $this->authcode(strtoupper(implode('', $code)));
         $secode                = [];
         $secode['verify_code'] = $code; // 把校验码保存到session
@@ -267,7 +267,7 @@ class Verify
     /* 加密验证码 */
     private function authcode($str)
     {
-        $key = substr(md5($this->seKey), 5, 8);
+        $key = substr(md5($this->config['seKey']), 5, 8);
         $str = substr(md5($str), 8, 10);
         return md5($key . $str);
     }

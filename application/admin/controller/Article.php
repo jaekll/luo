@@ -79,7 +79,7 @@ class Article extends Base{
     public function cate_index(){
 
         $cate = new ArticleCateModel();
-        $list = $cate->paginate(5);
+        $list = $cate->paginate(15);
         $this->assign('list',$list);
         return $this->fetch('article/cate/cate');
     }

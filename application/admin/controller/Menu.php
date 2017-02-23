@@ -16,7 +16,7 @@ class Menu extends Base  {
     public function index(){
         $menu = new MenuModel();
         $admin_rule = $menu->getAll();
-        $arr = LeftNav::rule($admin_rule);
+        $arr = $this->leftNav($admin_rule);
         $this->assign('admin_rule',$arr);
         return $this->fetch();
     }
@@ -58,5 +58,19 @@ class Menu extends Base  {
         $menuModel = new MenuModel();
         $result = $this->order($menuModel,$data);
         return json($result);
+    }
+
+    private  function leftNav($cate , $lefthtml = '— — ' , $pid=0 , $lvl=0, $leftpin=0 ){
+        $arr=array();
+        foreach ($cate as $v){
+            if($v['pid']==$pid){
+                $v['lvl']=$lvl + 1;
+                $v['leftpin']=$leftpin + 0;//左边距
+                $v['lefthtml']=str_repeat($lefthtml,$lvl);
+                $arr[]=$v;
+                $arr= array_merge($arr,$this->leftNav($cate,$lefthtml,$v['id'],$lvl+1 , $leftpin+20));
+            }
+        }
+        return $arr;
     }
 }

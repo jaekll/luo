@@ -14,6 +14,9 @@
  */
 namespace com;
 
+use \think\Db;
+use \think\Session;
+
 class Auth{
 
     //默认配置
@@ -35,10 +38,11 @@ class Auth{
 
     /**
       * 检查权限
-      * @param name string|array  需要验证的规则列表,支持逗号分隔的权限规则或索引数组
-      * @param uid  int           认证用户的id
-      * @param string mode        执行check的模式
-      * @param relation string    如果为 'or' 表示满足任一条规则即通过验证;如果为 'and'则表示需满足所有规则才能通过验证
+      * @param $name string|array  需要验证的规则列表,支持逗号分隔的权限规则或索引数组
+      * @param $uid  int           认证用户的id
+     *  @param $type
+      * @param string $mode        执行check的模式
+      * @param $relation string    如果为 'or' 表示满足任一条规则即通过验证;如果为 'and'则表示需满足所有规则才能通过验证
       * @return boolean           通过验证返回true;失败返回false
      */
     public function check($name, $uid, $type=1, $mode='url', $relation='or') {
@@ -85,7 +89,7 @@ class Auth{
 
     /**
      * 根据用户id获取用户组,返回值为数组
-     * @param  uid int     用户id
+     * @param  $uid int     用户id
      * @return array       用户所属的用户组 array(
      *     array('uid'=>'用户id','group_id'=>'用户组id','title'=>'用户组名称','rules'=>'用户组拥有的规则id,多个,号隔开'),
      *     ...)   
@@ -94,9 +98,9 @@ class Auth{
         static $groups = array();
         if (isset($groups[$uid]))
             return $groups[$uid];
-        $user_groups = \think\Db::table('think_auth_group_access')
+        $user_groups = Db::table($this->_config['auth_group_access'])
             ->alias('a')
-            ->join("think_auth_group g", "g.id=a.group_id")
+            ->join("{$this->_config['auth_group']} g", "g.id=a.group_id")
             ->where("a.uid='$uid' and g.status='1'")
             ->field('uid,group_id,title,rules')->select();
         $groups[$uid] = $user_groups ? $user_groups : array();
@@ -106,7 +110,8 @@ class Auth{
     /**
      * 获得权限列表
      * @param integer $uid  用户id
-     * @param integer $type 
+     * @param integer $type
+     * @return array
      */
     protected function getAuthList($uid,$type) {
         static $_authList = array(); //保存用户验证通过的权限列表
@@ -115,8 +120,8 @@ class Auth{
             return $_authList[$uid.$t];
         }
 
-        if( $this->_config['auth_type']==2 && \think\Session::get('_auth_list_'.$uid.$t)){
-            return \think\Session::get('_auth_list_'.$uid.$t);
+        if( $this->_config['auth_type']== 2 && Session::get('_auth_list_'.$uid.$t)){
+            return Session::get('_auth_list_'.$uid.$t);
         }
 
         //读取用户所属用户组
@@ -137,7 +142,7 @@ class Auth{
             'status'=>1,
         );
         //读取用户组所有权限规则
-        $rules = \think\Db::table('think_auth_rule')->where($map)->field('condition,name')->select();
+        $rules = Db::table($this->_config['auth_rule'])->where($map)->field('condition,name')->select();
 
         //循环规则，判断结果。
         $authList = array();   //
@@ -146,7 +151,7 @@ class Auth{
                 $user = $this->getUserInfo($uid);//获取用户信息,一维数组
 
                 $command = preg_replace('/\{(\w*?)\}/', '$user[\'\\1\']', $rule['condition']);
-                //dump($command);//debug
+
                 @(eval('$condition=(' . $command . ');'));
                 if ($condition) {
                     $authList[] = strtolower($rule['name']);
@@ -159,18 +164,21 @@ class Auth{
         $_authList[$uid.$t] = $authList;
         if($this->_config['auth_type']==2){
             //规则列表结果保存到session
-            \think\Session::set('_auth_list_'.$uid.$t, $authList);
+            Session::set('_auth_list_'.$uid.$t, $authList);
         }
         return array_unique($authList);
     }
 
     /**
+     * @param $uid
      * 获得用户资料,根据自己的情况读取数据库
      */
     protected function getUserInfo($uid) {
-        static $userinfo=array();
+        static $userinfo = array();
+
         if(!isset($userinfo[$uid])){
-             $userinfo[$uid]=\think\Db::table('think_admin')->where('id',$uid)->find();
+
+             $userinfo[$uid]= Db::table($this->_config['auth_user'])->where('id',$uid)->find();
         }
         return $userinfo[$uid];
     }

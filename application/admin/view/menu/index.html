@@ -63,8 +63,10 @@
                             </tr>
                             {/foreach}
                             <tr>
-                                <td colspan="8" align="right">
-                                    <button type="submit"  id="btnorder" class="btn btn-info">更新排序</button></td>
+                                <td colspan="8" align="center">
+                                    <button type="button" class="btn btn-primary btn-outline" data-toggle="modal" data-target="#myModal" style="margin-left: 0px">添加菜单</button>
+                                    <button type="submit"  id="btnorder" class="btn btn-info">更新排序</button>
+                                </td>
                             </tr>
                             </tbody>
                         </table>
@@ -109,7 +111,7 @@
                         <label class="col-sm-3 control-label">节点</label>
                         <div class="col-sm-8">
                             <input type="text" name="name" id="name" placeholder="模块/控制器/方法" class="form-control"/>
-                            <span class="help-block m-b-none">如：admin/user/adduser (一级节点添加“#”即可)</span>
+                            <span class="help-block m-b-none">如：admin/user/add_user (一级节点添加“#”即可)</span>
                         </div>
                     </div>
                     <div class="hr-line-dashed"></div>

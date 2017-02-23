@@ -46,7 +46,7 @@ class Login extends Controller{
         }
 
         //验证用户状态
-        if($hasUser['status'] !== 0){
+        if($hasUser['status'] !== 1){
             log_db($hasUser['id'],$username,'用户【'.$username.'】登录失败：该账号被禁用',2);
             return json(['code' => -2, 'url' => '', 'msg' => '该账号被禁用']);
         }
@@ -69,8 +69,13 @@ class Login extends Controller{
             'last_login_time' => time()
         ];
 
-        Db::name('admin')->where('id', $hasUser['id'])->update($param);
-        log_db($hasUser['id'],session('username'),'用户【'.session('username').'】登录成功',1);
+        $result = $user->updateUser($param,$hasUser['id']);
+        if($result){
+            log_db($hasUser['id'],session('username'),'用户【'.session('username').'】登录成功',1);
+        }else{
+            log_db($hasUser['id'],session('username'),'用户【'.session('username').'】登录成功,用户登录信息更新失败',1);
+        }
+
         return json(['code' => 1, 'url' => url('index/index'), 'msg' => '登录成功！']);
 
     }
@@ -84,7 +89,7 @@ class Login extends Controller{
         $this->redirect('login');
     }
 
-    public function checkCode()
+    public function getCode()
     {
         $code = new Verify(['imageH'=>34,'imageW'=>100,'codeSet'=>'0123456789','length'=>4,'fontSize'=>13,'useNoise'=>false,'useCurve'=>false]);
 

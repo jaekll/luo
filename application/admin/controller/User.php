@@ -129,7 +129,7 @@ class User extends Base {
     /**
      * @return \think\response\Json
      */
-    public function user_state()
+    public function user_status()
     {
         $uid = input('param.id');
         $user = new UserModel();

@@ -3,7 +3,8 @@ namespace app\admin\controller;
 
 use app\admin\model\NodeModel;
 use app\admin\model\RoleModel;
-use think\Request;
+use \think\Request;
+use \think\Db;
 
 class Role extends Base {
 
@@ -60,6 +61,22 @@ class Role extends Base {
         $role = $roleModel->getOneRole($id);
         $this->assign(['role'=>$role]);
         return $this->fetch('edit');
+    }
+
+    public function role_status()
+    {
+        $id = input('param.id');
+        $status = Db::name('auth_group')->where('id',$id)->value('status');//判断当前状态情况
+        if($status==1)
+        {
+            $flag = Db::name('auth_group')->where('id',$id)->setField(['status'=>0]);
+            return json(['code' => 1, 'data' => $flag['data'], 'msg' => '已禁止']);
+        }
+        else
+        {
+            $flag = Db::name('auth_group')->where('id',$id)->setField(['status'=>1]);
+            return json(['code' => 0, 'data' => $flag['data'], 'msg' => '已开启']);
+        }
     }
 
     public function permission()
