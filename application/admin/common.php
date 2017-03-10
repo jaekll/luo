@@ -4,6 +4,7 @@ use think\Db;
 /**
  * 将字符解析成数组
  * @param $str
+ * @return array
  */
 function parseParams($str)
 {
@@ -17,6 +18,7 @@ function parseParams($str)
  * 子孙树 用于菜单整理
  * @param $param
  * @param int $pid
+ * @return array
  */
 function subTree($param, $pid = 0)
 {
@@ -39,7 +41,7 @@ function subTree($param, $pid = 0)
  * @param  [type] $username    [用户名]
  * @param  [type] $description [描述]
  * @param  [type] $status      [状态]
- * @return [type]              [description]
+ * @return mixed
  */
 function log_db($uid,$username,$description,$status)
 {
@@ -51,12 +53,12 @@ function log_db($uid,$username,$description,$status)
     $data['ip'] = request()->ip();
     $data['add_time'] = time();
     $log = Db::name('Log')->insert($data);
-
+    return true;
 }
 
 
 /**
- * 整理菜单树方法
+ * 无限极菜单树方法
  * @param $param
  * @return array
  */
@@ -85,6 +87,48 @@ function prepareMenu($param)
         }
     }
     unset($child);
+    return $parent;
+}
+
+function MenuTree($param){
+    $return = [];
+    $parent = [];
+
+
+    foreach($param  as $vo){
+        if($vo['status'] == 1){
+            if($vo['name'] == '#'){
+                $return[$vo['id']]= [
+                    'id'=>$vo['id'],
+                    'name'=>$vo['name'],
+                    'title'=>$vo['title'],
+                    'pid'=>$vo['pid'],
+                    'css'=>$vo['css'],
+                    'href'=>'#',
+                    'child'=>''
+                ];
+            }else{
+                $return[$vo['id']]= [
+                    'id'=>$vo['id'],
+                    'name'=>$vo['name'],
+                    'title'=>$vo['title'],
+                    'css'=>$vo['css'],
+                    'pid'=>$vo['pid'],
+                    'href'=>url($vo['name']),
+                    'child'=>''
+                ];
+            }
+        }
+    }
+
+    foreach($return as $k=>$v){
+        if($v['pid'] > 0){
+            $return[$v['pid']]['child'][$v['id']] = &$return[$k];
+        }else{
+            $parent[] = &$return[$k];
+        }
+    }
+
     return $parent;
 }
 

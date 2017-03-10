@@ -12,7 +12,7 @@ class Upload extends Base{
     }
 
     //管理员头像上传
-    public function upload_face(){
+    public function uploadFace(){
         $request = Request::instance();
         $file = $request->file('file');
         $info = $file->move(ROOT_PATH . 'public' . DS . 'uploads/face');

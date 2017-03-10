@@ -1,6 +1,7 @@
 <?php
 namespace app\admin\controller;
 
+use app\admin\model\MenuModel;
 use app\admin\model\NodeModel;
 use app\admin\model\RoleModel;
 use \think\Request;
@@ -82,7 +83,7 @@ class Role extends Base {
     public function permission()
     {
         $param = input('param.');
-        $node = new NodeModel();
+        $node = new MenuModel();
         //获取现在的权限
         if('get' == $param['type']){
             $nodeStr = $node->getNodeInfo($param['id']);
