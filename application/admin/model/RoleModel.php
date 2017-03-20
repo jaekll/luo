@@ -11,6 +11,9 @@ class RoleModel extends Model
     // 开启自动写入时间戳字段
     protected $autoWriteTimestamp = true;
 
+    public function users(){
+        return $this->belongsToMany('User','auth_group_access','uid','group_id');
+    }
     /**
      * [getRolePageByWhere 根据条件分页获取角色列表信息]
      * @param $map array

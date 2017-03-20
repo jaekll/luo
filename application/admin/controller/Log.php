@@ -22,7 +22,7 @@ class Log extends Base
             $where['admin_id'] =  $key;
         }
         $page = input('get.page') ? input('get.page'):1;
-        $limits = 10;// 获取总条数
+        $limits = 20;// 获取总条数
         $lists = Db::name('log')->where($where)->page($page, $limits)->order('add_time desc')->select();
         $Ip = new IpLocation('UTFWry.dat'); // 实例化类 参数表示IP地址库文件
         foreach($lists as $k=>$v){

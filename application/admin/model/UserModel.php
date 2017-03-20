@@ -12,6 +12,9 @@ class UserModel extends Model {
 
     protected $name = 'admin';
 
+    public function roles(){
+        return $this->belongsToMany('RoleModel','auth_group_access','group_id','uid');
+    }
     /**
      * 根据条件返回用户的数量
      * @param array $where
