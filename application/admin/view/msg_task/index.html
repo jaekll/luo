@@ -8,7 +8,7 @@
         <div class="ibox-content">
             <div class="row">
                 <div class="col-sm-2">
-                    <a href="{:url('MsgBlock/add')}" class="btn btn-primary">添加模块</a>
+                    <a href="{:url('MsgTask/add')}" class="btn btn-primary">添加模块</a>
                 </div>
             </div>
             <div class="hr-line-dashed"></div>
@@ -16,15 +16,15 @@
                 <div class="example">
                     <table class="table table-bordered table-hover">
                         <thead>
-                            <tr>
-                                <th>模块名</th>
-                                <th>模块类型</th>
-                                <th>模块说明</th>
-                                <th>状态</th>
-                                <th>拉取频率</th>
-                                <th>创建时间</th>
-                                <th>操作</th>
-                            </tr>
+                        <tr>
+                            <th>模块名</th>
+                            <th>模块类型</th>
+                            <th>模块说明</th>
+                            <th>状态</th>
+                            <th>拉取频率</th>
+                            <th>创建时间</th>
+                            <th>操作</th>
+                        </tr>
                         </thead>
                         <script id="list-tpl" type="text/html">
                             {{# for(var i=0;i<d.length;i++){ }}
@@ -41,9 +41,9 @@
                                 <td>{{d[i].createtime}}</td>
                                 <td>
                                     <a href="javascript:;" onclick="" class="btn btn-primary btn-outline btn-xs">
-                                    <i class="fa fa-paste"></i> 编辑</a>&nbsp;&nbsp;
+                                        <i class="fa fa-paste"></i> 编辑</a>&nbsp;&nbsp;
                                     <a href="javascript:;" onclick="" class="btn btn-danger btn-outline btn-xs">
-                                     <i class="fa fa-trash-o"></i> 删除</a>
+                                        <i class="fa fa-trash-o"></i> 删除</a>
                                 </td>
                             </tr>
                             {{# } }}
@@ -73,7 +73,7 @@
     AjaxPage();
     function AjaxPage(curr){
 //        var key=$('#key').val();
-        $.getJSON('{:url("MsgBlock/index")}', {page: curr || 1}, function(data){
+        $.getJSON('{:url("MsgTask/index")}', {page: curr || 1}, function(data){
             $(".spiner-example").css('display','none'); //数据加载完关闭动画
             if(data==''){
                 $("#list-content").html('<td colspan="20" style="padding-top:10px;padding-bottom:10px;font-size:16px;text-align:center">暂无数据</td>');
