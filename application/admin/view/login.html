@@ -37,17 +37,17 @@
             <form id="doLogin" name="doLogin" method="post" action="{:url('dologin')}">
                 <p class="m-t-md" id="err_msg">登录到后台</p>
                 <input type="text" class="form-control uname" placeholder="用户名" id="username" name="username" value="admin" />
-                <input type="password" class="form-control pword m-b" placeholder="密码" id="password" name="password" value="tianjianlong0923" />
+                <input type="password" class="form-control pword m-b" placeholder="密码" id="password" name="password" value="123456" />
                 {if condition="config('verify_type') eq 1"}
                     <div style="margin-bottom:70px">
                         <input type="text" class="form-control" placeholder="验证码" style="color:black;width:120px;float:left;margin:0px 0px;" name="code" id="code"/>
-                        <img src="{:url('getCode')}" onclick="javascript:this.src='{:url('getCode')}?tm='+Math.random();" style="float:right;cursor: pointer"/>
+                        <img id="verify" src="{:url('getCode')}" style="float:right;cursor: pointer"/>
                     </div>
                 {else/}
                     <div id="embed-captcha"></div>
                     <p id="wait" style="color: #9b9b9b">正在加载验证码......</p>
                 {/if}
-                <button type="submit" class="btn btn-primary btn-block">登　录</button>
+                <button type="submit" class="btn btn-primary btn-block login">登　录</button>
             </form>
         </div>
     </div>
@@ -104,19 +104,25 @@
 
 
 <script>
+var codeUrl =  "{:url('getCode')}";
 $(function(){
+
     $('#doLogin').ajaxForm({
         beforeSubmit: checkForm, // 此方法主要是提交前执行的方法，根据需要设置
         success: complete, // 这是提交后的方法
         dataType: 'json'
     });
-    
+
+    $('#verify').bind('click',function(){
+        getCode(this);
+    });
+
     function checkForm(){
         if( '' == $.trim($('#username').val())){
             luo.error('请输入登录用户名');
             return false;
         }
- 
+
         if( '' == $.trim($('#password').val())){
             luo.error('请输入登录密码');
             return false;
@@ -131,13 +137,18 @@ $(function(){
             luo.success(data.msg,data.url);
         }else{
             luo.error(data.msg);
-            $("button").removeClass('btn-danger').addClass('btn-primary').text("登　录");       
-            return false;   
+            $("button").removeClass('btn-danger').addClass('btn-primary').text("登　录");
+            return false;
         }
 
     }
- 
+
+    function getCode(self){
+        self.src = codeUrl + '?tm='+Math.random();
+    }
+
 });
+
 </script>
 
 </body>

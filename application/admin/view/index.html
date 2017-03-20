@@ -9,7 +9,7 @@
             <ul class="nav" id="side-menu">
                 <li class="nav-header">
                     <div class="dropdown profile-element">
-                        <span><img alt="image" class="img-circle" width="70px" height="70px" src="/static/admin/images/a1.jpg" onerror="this.src='/static/admin/images/head_default.gif'"/></span>
+                        <span><img alt="image" class="img-circle" width="70px" height="70px" src="{:url($icon,'',false)}" onerror="this.src='/static/admin/images/head_default.gif'"/></span>
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                             <span class="clear">
                                 <span class="block m-t-xs"><strong class="font-bold">{$username}</strong></span>
@@ -25,18 +25,36 @@
                     </div>
                 </li>
                 {if!empty($menu)}
-                    {foreach name="menu" item="val"}
+                    {foreach name="menu" item="v1"}
                         <li class="menu">
-                            <a href="{$val.href}">
-                                <i class="{$val.css}"></i>
-                                <span class="nav-label">{$val.title}</span>
+                            <a href="{$v1.href}">
+                                <i class="{$v1.css}"></i>
+                                <span class="nav-label">{$v1.title}</span>
                                 <span class="fa arrow"></span>
                             </a>
-                            {if !empty($val['child'])}
-                                {foreach name="$val['child']" item="v"}
+                            {if !empty($v1['child'])}
+                                {foreach name="$v1['child']" item="v2"}
                                     <ul class="nav nav-second-level">
                                         <li>
-                                            <a class="J_menuItem" href="{$v.href}">{$v.title}</a>
+                                                {if !empty($v2['child'])}
+                                                    <a href="{$v2.href}">
+                                                        {$v2.title}
+                                                    <span class="fa arrow"></span>
+                                                    {foreach name="$v2['child']" item="v3"}
+                                                    <ul class="nav nav-second-level">
+                                                        <li>
+                                                            <a class="J_menuItem" href="{$v3.href}">{$v3.title}</a>
+                                                        </li>
+
+                                                    </ul>
+                                                    </a>
+                                                    {/foreach}
+                                                {else}
+                                                    <a class="J_menuItem" href="{$v2.href}">
+                                                        {$v2.title}
+                                                    </a>
+                                                {/if}
+
                                         </li>
 
                                     </ul>

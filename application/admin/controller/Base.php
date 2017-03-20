@@ -1,7 +1,8 @@
 <?php
 
 namespace app\admin\controller;
-use app\admin\model\NodeModel;
+use app\admin\model\MenuModel;
+use app\admin\model\UserModel;
 use app\common\lib\Config;
 use think\Controller;
 use \com\Auth;
@@ -37,7 +38,7 @@ class Base extends Controller
             'icon' => session('icon'),
             'rolename' => session('rolename'),
         ];
-        $node = new NodeModel();
+        $node = new MenuModel();
         $userInfo['menu'] = $node->getMenu(session('rule'));
         $this->assign($userInfo);
 

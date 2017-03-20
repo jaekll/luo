@@ -12,9 +12,6 @@ use com\Geetestlib;
 class Login extends Controller{
 
     public function login(){
-        cache('app_begin','6666',0);
-        cache('keymap','123',6);
-        cache('keyvalue','456',6);
         return $this->fetch('/login');
     }
 
